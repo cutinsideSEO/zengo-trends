@@ -209,6 +209,10 @@
                     <label for="group-filter" class="block text-sm font-medium text-gray-300 mb-2">Filter by Group:</label>
                     <select id="group-filter" class="custom-select block w-full p-2.5 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"></select>
                 </div>
+                <div>
+                    <label for="keyword-select" class="block text-sm font-medium text-gray-300 mb-2">Select Keyword:</label>
+                    <select id="keyword-select" class="custom-select block w-full p-2.5 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"></select>
+                </div>
                  <div>
                     <label for="keyword-text-filter" class="block text-sm font-medium text-gray-300 mb-2">Filter by Keyword:</label>
                     <input type="text" id="keyword-text-filter" class="block w-full p-2.5 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500" placeholder="Contains...">
@@ -235,10 +239,6 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    <label for="keyword-select" class="block text-sm font-medium text-gray-300 mb-2">Select Keyword:</label>
-                    <select id="keyword-select" class="custom-select block w-full p-2.5 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500"></select>
-                </div>
             </div>
 
             <!-- Keyword Info -->
@@ -249,8 +249,8 @@
                         <p id="volume-display" class="font-bold text-2xl header-text"></p>
                     </div>
                     <div>
-                        <p class="text-gray-400 text-sm">CPS</p>
-                        <p id="cps-display" class="font-bold text-2xl header-text"></p>
+                        <p class="text-gray-400 text-sm">CPC</p>
+                        <p id="cpc-display" class="font-bold text-2xl header-text"></p>
                     </div>
                     <div class="max-w-xs">
                         <p class="text-gray-400 text-sm">Intents</p>
@@ -359,7 +359,7 @@
             // Keyword info display
             const keywordInfo = document.getElementById('keyword-info');
             const volumeDisplay = document.getElementById('volume-display');
-            const cpsDisplay = document.getElementById('cps-display');
+            const cpcDisplay = document.getElementById('cpc-display');
             const intentsDisplay = document.getElementById('intents-display');
             const lastUpdateDisplay = document.getElementById('last-update-display');
 
@@ -439,7 +439,7 @@
                             if (!serpData[keyword]) {
                                 serpData[keyword] = {
                                     results: [],
-                                    details: { CPS: row.CPS, Intents: row.Intents, 'Last Update': row['Last Update'] }
+                                    details: { CPC: row.CPC, Intents: row.Intents, 'Last Update': row['Last Update'] }
                                 };
                             }
                             
@@ -621,7 +621,7 @@
 
                 if (keywordDetails && serpDetails) {
                     volumeDisplay.textContent = Number(keywordDetails['Global volume'] || 0).toLocaleString();
-                    cpsDisplay.textContent = `$${Number(serpDetails.CPS || 0).toFixed(2)}`;
+                    cpcDisplay.textContent = `$${Number(serpDetails.CPC || 0).toFixed(2)}`;
                     intentsDisplay.textContent = serpDetails.Intents || 'N/A';
                     
                     let lastUpdate = 'N/A';
@@ -798,8 +798,8 @@
                     header.classList.add('flex', 'justify-between', 'font-semibold', 'text-gray-400', 'text-xs', 'pb-2', 'border-b', 'border-gray-600');
                     header.innerHTML = `
                         <span class="flex-grow">URL</span>
-                        <span class="w-24 text-center">Avg. Position</span>
                         <span class="w-24 text-center">Appearances</span>
+                        <span class="w-24 text-center">Avg. Position</span>
                     `;
                     urlListContainer.appendChild(header);
 
@@ -817,8 +817,8 @@
                                     <a href="${urlData.url}" target="_blank" class="text-blue-400 hover:underline text-xs">${urlData.url}</a>
                                 </div>
                             </div>
-                            <span class="text-gray-300 text-xs w-24 text-center flex-shrink-0">${urlData.avgPosition}</span>
                             <span class="text-gray-300 text-xs font-semibold w-24 text-center flex-shrink-0">${urlData.count}</span>
+                            <span class="text-gray-300 text-xs w-24 text-center flex-shrink-0">${urlData.avgPosition}</span>
                         `;
                         
                         const keywordDetailsContainer = document.createElement('div');
